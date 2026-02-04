@@ -1,54 +1,27 @@
-
 {
   "name": "Lopes Finance",
   "short_name": "Lopes",
   "description": "Premium Mobile-First Personal Finance Manager",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0C0B40",
-  "theme_color": "#0C0B40",
-  "icons": [
-    {
-      "src": "https://cdn-icons-png.flaticon.com/512/10543/10543317.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
-}
-{
-  "name": "Lopes Finance",
-  "short_name": "Lopes",
-  "description": "Premium Mobile-First Personal Finance Manager",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#0C0B40",
-  "theme_color": "#0C0B40",
+  "background_color": "#0C0B4D",
+  "theme_color": "#0C0B4D",
   "icons": [
     {
       "src": "/icons/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/icons/maskable-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
+      "type": "image/png"
     },
     {
       "src": "/icons/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
       "src": "/icons/maskable-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
-  ],
-  "scope": "/"
+  ]
 }
