@@ -23,7 +23,7 @@ const App: React.FC = () => {
       <div className="min-h-screen bg-tanzine-900 flex items-center justify-center p-6">
         <GlassCard className="w-full max-w-sm space-y-8 py-10">
           <div className="text-center space-y-2">
-            <h1 className="text-4xl font-display font-black text-white bg-clip-text text-transparent bg-gradient-to-r from-white to-tanzine-300">Tanzine.</h1>
+            <h1 className="text-4xl font-display font-black text-white bg-clip-text text-transparent bg-gradient-to-r from-white to-tanzine-300">Lopes Finance.</h1>
             <p className="text-tanzine-100/60 text-sm">Desenhe seu futuro financeiro com elegância.</p>
           </div>
           
