@@ -1,15 +1,14 @@
-
 {
   "name": "Lopes Finance",
   "short_name": "Lopes",
-  "description": "Premium Mobile-First Personal Finance Manager",
+  "description": "Premium Mobile-First Personal Finance Manager by Brunotech",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0C0B40",
-  "theme_color": "#0C0B40",
+  "background_color": "#000B3D",
+  "theme_color": "#000B3D",
   "icons": [
     {
-      "src": "https://cdn-icons-png.flaticon.com/512/10543/10543317.png",
+      "src": "logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
