@@ -8,17 +8,15 @@
     
     <!-- PWA & SEO -->
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#000B3D">
+    <meta name="theme-color" content="#0C0B40">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="description" content="Gerenciador financeiro premium com insights de IA e interface mobile-first de alta performance.">
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="apple-touch-icon" href="logo.png">
     
     <!-- Open Graph (Social Media) -->
-    <meta property="og:title" content="Lopes Finance">
+    <meta property="og:title" content="Tanzine Finance">
     <meta property="og:description" content="Gestão financeira premium com Inteligência Artificial.">
-    <meta property="og:image" content="logo.png">
+    <meta property="og:image" content="https://cdn-icons-png.flaticon.com/512/10543/10543317.png">
     <meta property="og:type" content="website">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -34,7 +32,7 @@
               tanzine: {
                 50: '#E8E7FD', 100: '#D2CFFB', 200: '#B7B4F3', 300: '#A09CE7',
                 400: '#7F7BD8', 500: '#5D59B9', 600: '#413D9B', 700: '#29277D',
-                800: '#191767', 900: '#000B3D', 950: '#000620'
+                800: '#191767', 900: '#0C0B40', 950: '#060520'
               },
               snappy: {
                 50: '#FEEFD8', 100: '#FDDCB1', 200: '#F9C289', 300: '#F4A86B',
@@ -56,7 +54,7 @@
       }
       body {
         -webkit-tap-highlight-color: transparent;
-        background-color: #000B3D;
+        background-color: #0C0B40;
         color: white;
         overflow-x: hidden;
         user-select: none;
@@ -91,8 +89,10 @@
   }
 }
 </script>
+<link rel="stylesheet" href="/index.css">
 </head>
 <body>
     <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
 </body>
 </html>
