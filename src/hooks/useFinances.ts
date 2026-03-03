@@ -31,7 +31,7 @@ type UseFinancesReturn = {
     loading: boolean;
 };
 
-export const useFinances = (): UseFinancesReturn => {
+export const useFinances = (userId: string): UseFinancesReturn => {
     const [items, setItems] = useState<Item[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -40,24 +40,34 @@ export const useFinances = (): UseFinancesReturn => {
     const [filterMonth, setFilterMonth] = useState(now.getMonth());
 
     useEffect(() => {
-        const q = query(collection(db, 'transactions'), orderBy('date', 'desc'));
+        if (!userId) return;
+
+        const q = query(
+            collection(db, 'transactions'),
+            orderBy('date', 'desc')
+        );
+
         const unsubscribe = onSnapshot(q, (snapshot) => {
-            const data: Item[] = snapshot.docs.map((d) => {
-                const raw = d.data();
-                return {
-                    id: d.id,
-                    name: raw.name,
-                    value: raw.value,
-                    type: raw.type,
-                    category: raw.category,
-                    date: (raw.date as Timestamp).toDate(),
-                };
-            });
+            const data: Item[] = snapshot.docs
+                .map((d) => {
+                    const raw = d.data();
+                    return {
+                        id: d.id,
+                        name: raw.name,
+                        value: raw.value,
+                        type: raw.type,
+                        category: raw.category,
+                        date: (raw.date as Timestamp).toDate(),
+                        userId: raw.userId,
+                    };
+                })
+                .filter(item => item.userId === userId); // Filter client-side initially to avoid complex index requirements right away
+
             setItems(data);
             setLoading(false);
         });
         return () => unsubscribe();
-    }, []);
+    }, [userId]);
 
     const filteredItems = items.filter((item) => {
         return (
@@ -80,10 +90,11 @@ export const useFinances = (): UseFinancesReturn => {
         { income: 0, expense: 0, balance: 0 }
     );
 
-    const addItem = async (item: Omit<Item, 'id'>) => {
+    const addItem = async (item: Omit<Item, 'id' | 'userId'>) => {
         try {
             await addDoc(collection(db, 'transactions'), {
                 ...item,
+                userId,
                 date: Timestamp.fromDate(item.date),
             });
         } catch (error) {

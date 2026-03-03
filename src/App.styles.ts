@@ -51,6 +51,50 @@ export const HeaderSubtitle = styled.span`
   font-weight: 400;
 `;
 
+export const HeaderRight = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+`;
+
+export const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  
+  @media (max-width: 600px) {
+    display: none;
+  }
+`;
+
+export const UserName = styled.span`
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+`;
+
+export const UserEmail = styled.span`
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+`;
+
+export const LogoutButton = styled.button`
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  
+  &:hover {
+    background: rgba(239, 68, 68, 0.3);
+    color: #fff;
+  }
+`;
+
 export const Body = styled.main`
   max-width: 1100px;
   margin: 0 auto;
