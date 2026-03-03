@@ -1,26 +1,68 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './index.css';
+import * as C from './App.styles';
+import { useFinances } from './hooks/useFinances';
+import InfoArea from './components/InfoArea/InfoArea';
+import InputArea from './components/InputArea/InputArea';
+import TableArea from './components/TableArea/TableArea';
+import FilterArea from './components/FilterArea/FilterArea';
 
-function App() {
+const App = () => {
+  const {
+    filteredItems,
+    summary,
+    filterYear,
+    filterMonth,
+    setFilterYear,
+    setFilterMonth,
+    addItem,
+    deleteItem,
+    loading,
+  } = useFinances();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <C.Container>
+      <C.Header>
+        <C.HeaderInner>
+          <C.HeaderLeft>
+            <C.HeaderIcon>💼</C.HeaderIcon>
+            <C.HeaderTextWrap>
+              <C.HeaderTitle>Finanças Pessoais</C.HeaderTitle>
+              <C.HeaderSubtitle>Controle de receitas e despesas</C.HeaderSubtitle>
+            </C.HeaderTextWrap>
+          </C.HeaderLeft>
+        </C.HeaderInner>
+      </C.Header>
+
+      <C.Body>
+        {loading ? (
+          <C.LoadingWrapper>
+            <C.Spinner />
+            <span>Carregando dados...</span>
+          </C.LoadingWrapper>
+        ) : (
+          <>
+            <FilterArea
+              filterYear={filterYear}
+              filterMonth={filterMonth}
+              onMonthChange={setFilterMonth}
+              onYearChange={setFilterYear}
+            />
+
+            <InfoArea
+              income={summary.income}
+              expense={summary.expense}
+              balance={summary.balance}
+            />
+
+            <InputArea onAdd={addItem} />
+
+            <TableArea items={filteredItems} onDelete={deleteItem} />
+          </>
+        )}
+      </C.Body>
+    </C.Container>
   );
-}
+};
 
 export default App;
