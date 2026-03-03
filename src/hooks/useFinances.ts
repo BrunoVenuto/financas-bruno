@@ -6,7 +6,7 @@ import {
     doc,
     onSnapshot,
     query,
-    orderBy,
+    where,
     Timestamp
 } from 'firebase/firestore';
 import { db } from '../firebase';
@@ -40,11 +40,14 @@ export const useFinances = (userId: string): UseFinancesReturn => {
     const [filterMonth, setFilterMonth] = useState(now.getMonth());
 
     useEffect(() => {
-        if (!userId) return;
+        if (!userId) {
+            setLoading(false);
+            return;
+        }
 
         const q = query(
             collection(db, 'transactions'),
-            orderBy('date', 'desc')
+            where('userId', '==', userId)
         );
 
         const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -61,9 +64,12 @@ export const useFinances = (userId: string): UseFinancesReturn => {
                         userId: raw.userId,
                     };
                 })
-                .filter(item => item.userId === userId); // Filter client-side initially to avoid complex index requirements right away
+                .sort((a, b) => b.date.getTime() - a.date.getTime());
 
             setItems(data);
+            setLoading(false);
+        }, (error) => {
+            console.error("Erro useEffect onSnapshot:", error);
             setLoading(false);
         });
         return () => unsubscribe();
