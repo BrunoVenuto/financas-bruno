@@ -8,6 +8,7 @@ import InputArea from './components/InputArea/InputArea';
 import TableArea from './components/TableArea/TableArea';
 import FilterArea from './components/FilterArea/FilterArea';
 import Login from './components/Login/Login';
+import CategorySummaryArea from './components/CategorySummaryArea/CategorySummaryArea';
 
 const App = () => {
   const { user, loading: authLoading, signInWithGoogle, signOut } = useAuth();
@@ -16,6 +17,7 @@ const App = () => {
   const {
     filteredItems,
     summary,
+    categorySummary,
     filterYear,
     filterMonth,
     setFilterYear,
@@ -84,6 +86,8 @@ const App = () => {
               expense={summary.expense}
               balance={summary.balance}
             />
+
+            <CategorySummaryArea categorySummary={categorySummary} />
 
             <InputArea onAdd={addItem} />
 

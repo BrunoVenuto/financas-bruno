@@ -18,10 +18,19 @@ type Summary = {
     balance: number;
 };
 
+export type CategorySummary = {
+    [category: string]: {
+        income: number;
+        expense: number;
+        balance: number;
+    }
+};
+
 type UseFinancesReturn = {
     items: Item[];
     filteredItems: Item[];
     summary: Summary;
+    categorySummary: CategorySummary;
     filterYear: number;
     filterMonth: number;
     setFilterYear: (y: number) => void;
@@ -96,6 +105,23 @@ export const useFinances = (userId: string): UseFinancesReturn => {
         { income: 0, expense: 0, balance: 0 }
     );
 
+    const categorySummary = filteredItems.reduce(
+        (acc: CategorySummary, item) => {
+            if (!acc[item.category]) {
+                acc[item.category] = { income: 0, expense: 0, balance: 0 };
+            }
+            if (item.type === 'income') {
+                acc[item.category].income += item.value;
+                acc[item.category].balance += item.value;
+            } else {
+                acc[item.category].expense += item.value;
+                acc[item.category].balance -= item.value;
+            }
+            return acc;
+        },
+        {}
+    );
+
     const addItem = async (item: Omit<Item, 'id' | 'userId'>) => {
         try {
             await addDoc(collection(db, 'transactions'), {
@@ -117,6 +143,7 @@ export const useFinances = (userId: string): UseFinancesReturn => {
         items,
         filteredItems,
         summary,
+        categorySummary,
         filterYear,
         filterMonth,
         setFilterYear,
