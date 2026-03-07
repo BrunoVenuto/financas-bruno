@@ -23,6 +23,7 @@ export type CategorySummary = {
         income: number;
         expense: number;
         balance: number;
+        transactions: { id: string; name: string; value: number; type: 'income' | 'expense' }[];
     }
 };
 
@@ -108,7 +109,7 @@ export const useFinances = (userId: string): UseFinancesReturn => {
     const categorySummary = filteredItems.reduce(
         (acc: CategorySummary, item) => {
             if (!acc[item.category]) {
-                acc[item.category] = { income: 0, expense: 0, balance: 0 };
+                acc[item.category] = { income: 0, expense: 0, balance: 0, transactions: [] };
             }
             if (item.type === 'income') {
                 acc[item.category].income += item.value;
@@ -117,6 +118,14 @@ export const useFinances = (userId: string): UseFinancesReturn => {
                 acc[item.category].expense += item.value;
                 acc[item.category].balance -= item.value;
             }
+
+            acc[item.category].transactions.push({
+                id: item.id,
+                name: item.name,
+                value: item.value,
+                type: item.type
+            });
+
             return acc;
         },
         {}

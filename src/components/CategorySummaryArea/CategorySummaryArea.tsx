@@ -40,6 +40,19 @@ export const CategorySummaryArea = ({ categorySummary }: Props) => {
                                     </C.Amount>
                                 )}
                             </C.Amounts>
+
+                            {data.transactions && data.transactions.length > 0 && (
+                                <C.TransactionList>
+                                    {data.transactions.map((t) => (
+                                        <C.TransactionItem key={t.id}>
+                                            <C.TransactionName title={t.name}>{t.name}</C.TransactionName>
+                                            <C.TransactionValue type={t.type}>
+                                                {t.type === 'expense' ? '-' : '+'} {formatCurrency(t.value)}
+                                            </C.TransactionValue>
+                                        </C.TransactionItem>
+                                    ))}
+                                </C.TransactionList>
+                            )}
                         </C.CategoryCard>
                     );
                 })}

@@ -85,3 +85,34 @@ export const Amount = styled.div<{ type: 'income' | 'expense' | 'balance', isNeg
     return isNegative ? '#f87171' : '#a5b4fc';
   }};
 `;
+
+export const TransactionList = styled.ul`
+  list-style: none;
+  margin: 16px 0 0 0;
+  padding: 12px 0 0 0;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+export const TransactionItem = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+`;
+
+export const TransactionName = styled.span`
+  color: #cbd5e1;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60%;
+`;
+
+export const TransactionValue = styled.span<{ type: 'income' | 'expense' }>`
+  font-weight: 500;
+  color: ${({ type }) => (type === 'income' ? '#4ade80' : '#f87171')};
+`;
